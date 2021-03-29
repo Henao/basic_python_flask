@@ -1,0 +1,28 @@
+html * {
+    font-family: sans-serif;
+}
+
+.navlogo{
+    display: flex;
+}
+
+.navlogo img{
+    display: block;
+    margin: 0 auto;
+}
+.navbar {
+    position: relative;
+    min-height: 85px;
+    margin-bottom: 20px;
+    border-radius: 0px!important;
+    border: 1px solid transparent;
+}
+.navbar-brand>img {
+    width: 200px!important;
+}
+ul.nav.navbar-nav {
+    padding: 1em 1em;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}

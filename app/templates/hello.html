@@ -22,15 +22,6 @@
         <a href="{{url_for('index')}}">Ir al Inicio</a>
     {% endif %}
 
-    <div class="container">
-        {{ wtf.quick_form(login_form) }}
-        <!-- <form action="{{ url_for('hello') }}" method="POST">
-            {{ login_form.username.label }}
-            {{ login_form.username }}
-          
-        </form> -->
-    </div>
-
     <ul>
         {% for todo in todos %}
     <!-- Macros: pequeños pedazos de código reutilizables para usar en los templates -->

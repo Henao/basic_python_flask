@@ -1,26 +1,20 @@
-from flask import Flask, request, flash
+from app.forms import LoginForm
+from flask import request
 from flask.globals import session
-from flask.helpers import make_response, url_for
+from flask.helpers import make_response
 from flask.templating import render_template
 from werkzeug.utils import redirect
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+
 import unittest
 
+from app import create_app
+from app.forms import LoginForm
 
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
-
-app.config['SECRET_KEY'] = 'SUPER SECRETO'
+app = create_app()
 
 todos = ['Comprar Café', 'Enviar cuenta de cobro', 'Entregar página al cliente', 'Comprar cervezas']
 
-class LoginForm(FlaskForm):
-    username = StringField('Nombre del usuario', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Enviar')
+
 
 @app.cli.command()
 def test():
@@ -46,29 +40,19 @@ def index():
     return response
 
 
-@app.route('/hello', methods=['GET','Post'])
+@app.route('/hello', methods=['GET'])
 def hello():
     user_ip = session.get('user_ip')
-    login_form = LoginForm()
+    # login_form = LoginForm()
     username = session.get('username')
   
     context = {
         'user_ip': user_ip,
         'todos': todos,
-        'login_form': login_form,
+        # 'login_form': login_form,
         'username' : username
        
     }
-
-    if login_form.validate_on_submit():
-        username = login_form.username.data
-        session['username'] = username
-
-        flash('Nombre de usuario registrado con éxito')
-
-        return redirect(url_for('index'))
-    
-
 
     return render_template('hello.html', **context)
     # El doble asterisco permite extender diccionarios en python y evitar el uso de context=contex
